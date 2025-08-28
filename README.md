@@ -19,10 +19,12 @@ Players send chat messages, and the NPC responds with short, immersive replies w
   - `npc_reply`
   - `history_used`
   - `npc_mood`
+  - `mood_intensity`
+  - `mood_reason`
   - `previous_mood`
   - `timestamp`
 
-*(Note: `mood_change` was initially implemented for debugging but later removed for clean, minimal logs.)*
+*(Note: `mood_intensity` & `mood_reason` are introduced to add additional flavour or improvements beyond the basics as mentioned in the Strectch Opportunities section of assignment. `mood_change` was initially implemented for debugging but later removed for clean, minimal logs.)*
 
 ---
 
@@ -47,8 +49,7 @@ Players send chat messages, and the NPC responds with short, immersive replies w
 
 ## 🚀 Stretch Improvements
 - **Mood detection** leverages **conversation history + LLM classification**, no fixed keyword lists.
-- Modular design → easy to plug in new LLMs/models.
-- Extensible to support richer moods or personalities in the future.
+- **Mood intensity** and **Mood Reason** introduced in log file to add additional flavour
 
 ---
 
