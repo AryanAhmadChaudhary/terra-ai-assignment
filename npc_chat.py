@@ -145,11 +145,6 @@ def main():
         }
         logs.append(log_entry)
 
-        # Pretty print
-        print(f"[player_id={pid} | mood={mood} | intensity={intensity} | time={ts}]")
-        print(f"Player: {text}\nNPC: {npc_reply}\n"
-              f"Context: {list(state[pid]['history'])}\n---")
-
     # Save logs to file
     with open("npc_log.txt", "w") as f:
         for entry in logs:
