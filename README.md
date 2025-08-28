@@ -6,7 +6,7 @@ Players send chat messages, and the NPC responds with short, immersive replies w
 ---
 
 ## ✨ Features
-- Processes **100 player messages** from `players.json`.
+- Processes around **100 player messages** from `players.json`.
 - Ensures messages are handled in **chronological order** (timestamps).
 - Maintains **per-player state**:
   - Stores the **last 3 messages** for context.
