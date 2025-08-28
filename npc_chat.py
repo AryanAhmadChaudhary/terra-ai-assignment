@@ -113,12 +113,7 @@ def main():
 
         # classify mood using history + current message
         mood = classify_mood_with_groq(prev_history, text, prev_mood)
-        state[pid]["mood"] = mood
-
-        # check if mood changed
-        mood_change = None
-        if mood != prev_mood:
-            mood_change = f"{prev_mood} → {mood}"
+        state[pid]["mood"] = mood        
 
         # update history
         state[pid]["history"].append(text)
@@ -133,15 +128,13 @@ def main():
             "history_used": list(state[pid]["history"]),
             "npc_mood": mood,
             "previous_mood": prev_mood,
-            "mood_change": mood_change,
             "timestamp": ts
         }
         logs.append(log_entry)
 
         # Pretty print
         print(f"[player_id={pid} | mood={mood} | time={ts}]")
-        if mood_change:
-            print(f"⚡ Mood shifted: {mood_change}")
+        
         print(f"Player: {text}\nNPC: {npc_reply}\n"
               f"Context: {list(state[pid]['history'])}\n---")
 
