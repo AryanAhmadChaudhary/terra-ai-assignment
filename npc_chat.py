@@ -54,19 +54,29 @@ Answer with only one word: "friendly", "angry", or "neutral".
 
 
 def generate_npc_reply(player_id, message, history, mood):
+    MOOD_STYLES = {
+    "friendly": "Speak warmly, with encouragement. Offer helpful tips.",
+    "angry": "Be curt and hostile. You may refuse to help or insult lightly.",
+    "neutral": "Keep replies factual and minimal, without much emotion."
+    }
+    
+    style = MOOD_STYLES.get(mood, "")
+
     context = "\n".join([f"Player: {msg}" for msg in history])
+
     prompt = f"""
-You are an NPC in a fantasy RPG game. 
-Your current mood is "{mood}".
-Keep responses short, immersive, and in character.
+    You are an NPC in a fantasy RPG. 
+    The NPC mood is "{mood}". {style}
 
-Conversation history:
-{context}
+    Keep responses short, immersive, and in character.
 
-Latest message:
-Player: {message}
-NPC:
-"""
+    Conversation history:
+    {context}
+
+    Latest message:
+    Player: {message}
+    NPC:
+    """
     try:
         completion = client.chat.completions.create(
             model=MODEL,
@@ -79,58 +89,6 @@ NPC:
         reply = f"(Fallback) NPC could not reply. Error: {e}"
 
     return reply
-
-
-# def main():
-#     # Load input JSON
-#     with open("players.json", "r") as f:
-#         messages = json.load(f)
-
-#     # Sort by timestamp
-#     messages.sort(key=lambda x: datetime.fromisoformat(x["timestamp"]))
-
-#     # Per-player state
-#     state = defaultdict(lambda: {"history": deque(maxlen=3), "mood": "neutral"})
-
-#     logs = []
-
-#     for msg in messages:
-#         pid = msg["player_id"]
-#         text = msg["text"]
-#         ts = msg["timestamp"]
-
-#         # grab history before adding this message
-#         prev_history = list(state[pid]["history"])
-
-#         # classify mood using history + current message
-#         mood = classify_mood_with_groq(prev_history, text, state[pid]["mood"])
-#         state[pid]["mood"] = mood
-
-#         # update history with latest msg
-#         state[pid]["history"].append(text)
-
-#         # generate reply
-#         npc_reply = generate_npc_reply(pid, text, list(state[pid]["history"]), mood)
-
-#         log_entry = {
-#             "player_id": pid,
-#             "message": text,
-#             "npc_reply": npc_reply,
-#             "history_used": list(state[pid]["history"]),
-#             "npc_mood": mood,
-#             "timestamp": ts
-#         }
-#         logs.append(log_entry)
-
-#         # Pretty print
-#         print(f"[player_id={pid} | mood={mood} | time={ts}]\n"
-#               f"Player: {text}\nNPC: {npc_reply}\n"
-#               f"Context: {list(state[pid]['history'])}\n---")
-
-#     # Save logs to file
-#     with open("npc_log_groq.txt", "w") as f:
-#         for entry in logs:
-#             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 def main():
     # Load input JSON
