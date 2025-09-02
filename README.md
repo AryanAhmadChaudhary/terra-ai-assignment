@@ -24,13 +24,12 @@ Players send chat messages, and the NPC responds with short, immersive replies w
   - `previous_mood`
   - `timestamp`
 
-*(Note: `mood_intensity` & `mood_reason` are introduced to add additional flavour or improvements beyond the basics as mentioned in the Strectch Opportunities section of assignment. `mood_change` was initially implemented for debugging but later removed for clean, minimal logs.)*
 
 ---
 
 ## 🛠️ Tech Stack
 - **Language:** Python 3.10+
-- **Model:** `llama-3.1-8b-instant` (via Perplexity API)
+- **Model:** `llama-3.1-8b-instant`
 - **Environment Management:** `.env` file 
 - **Dependencies:** Listed in `requirements.txt`
 
@@ -43,16 +42,3 @@ Players send chat messages, and the NPC responds with short, immersive replies w
 - `players.json` → Input dataset
 - `requirements.txt` → Python dependencies
 - `README.md` → Documentation
-- `ai_prompts.txt`  Conversation logs with Perplexity Pro (submitted as per assignment)
-
----
-
-## 🚀 Stretch Improvements
-- **Mood detection** leverages **conversation history + LLM classification**, no fixed keyword lists.
-- **Mood intensity** and **Mood Reason** introduced in log file to add additional flavour
-
----
-
-## 🤝 Acknowledgments
-- Assignment guidelines provided by course instructions.
-- AI assistance: Perplexity Chat (link shared separately as part of deliverables).
